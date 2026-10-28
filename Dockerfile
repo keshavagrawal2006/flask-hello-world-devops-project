@@ -1,6 +1,11 @@
-FROM python:3.6
-MAINTAINER keshavagrawal2006 "keshav.agrawal3@mitwpu.edu.in" # Change the name and email address
-COPY app.py test.py /app/
+FROM python:3.9-slim
+
 WORKDIR /app
-RUN pip install flask pytest flake8 # This downloads all the dependencies
+
+COPY app.py test.py /app/
+
+RUN pip install --no-cache-dir flask pytest flake8
+
+EXPOSE 5000
+
 CMD ["python", "app.py"]

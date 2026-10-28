@@ -1,7 +1,14 @@
+import unittest
 from app import app
 
+class TestApp(unittest.TestCase):
+    def setUp(self):
+        self.client = app.test_client()
 
-def test_hello():
-    response = app.test_client().get('/')
-    assert response.status_code == 200
-    assert response.data == b'Hello world!!!'
+    def test_hello(self):
+        response = self.client.get('/')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data, b'Hello world!!!')
+
+if __name__ == '__main__':
+    unittest.main()
